@@ -1,0 +1,21 @@
+POST  http://127.0.0.1:8080/upload/file
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name=""; filename="file.txt"
+
+< ./relative/path/to/local_file.txt
+--WebAppBoundary--
+
+###
+GET http://127.0.0.1:8080/api/v1/tags?page=1&page_size=3
+Accept: application/json
+
+###
+POST http://127.0.0.1:8080/api/v1/tags
+
+Content-Type: application/x-www-form-urlencoded;charset=utf-8
+
+name=Go&created_by=test
+
+###

@@ -1,0 +1,44 @@
+app:
+  defaultcontexttimeout: 60
+  defaultpagesize: 10
+  logfileext: .log
+  logfilename: app
+  logsavepath: storage/logs
+  maxpagesize: 100
+  uploadimageallowexts:
+  - .jpg
+  - .jpeg
+  - .png
+  uploadimagemaxsize: 5
+  uploadsavepath: storage/uploads
+  uploadserverurl: http://127.0.0.1:8080/static
+database:
+  charset: utf8
+  dbname: blog_service
+  dbtype: mysql
+  host: 106.13.54.147:3306
+  maxidleconns: 10
+  maxopenconns: 30
+  parsetime: true
+  password: 123456
+  tableprefix: blog_
+  username: root
+email:
+  from: xxx
+  host: smtp.qq.com
+  isssl: true
+  password: xxx
+  port: 465
+  to:
+  - xxx
+  - ppp
+  username: xxx
+jwt:
+  expire: 7200
+  issuer: hao
+  secret: akacrt
+server:
+  httpport: 8080
+  readtimeout: 60
+  runmode: release
+  writetimeout: 60

@@ -1,15 +1,15 @@
 package routers
 
 import (
+	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	_ "hao-admin/docs"
 	"hao-admin/global"
 	"hao-admin/internal/middleware"
 	"hao-admin/internal/routers/api"
-	v1 "hao-admin/internal/routers/api/v1"
+	"hao-admin/internal/routers/router"
 	"hao-admin/pkg/limiter"
-	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 	"net/http"
 	"time"
 )
@@ -36,8 +36,8 @@ func NewRouter() *gin.Engine {
 	r.Use(middleware.Translations())
 	r.Use(middleware.Tracing())
 
-	article := v1.NewArticle()
-	tag := v1.NewTag()
+	//article := v1.NewArticle()
+	//tag := v1.NewTag()
 	upload := api.NewUpload()
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
@@ -45,23 +45,25 @@ func NewRouter() *gin.Engine {
 	r.POST("/upload/file", upload.UploadFile)
 	r.POST("/auth", api.GetAuth)
 
-	apiv1 := r.Group("/api/v1")
-	apiv1.Use(middleware.JWT())
-	{
-		apiv1.POST("/tags", tag.Create)
-		apiv1.DELETE("/tags/:id", tag.Delete)
-		apiv1.PUT("/tags/:id", tag.Update)
-		apiv1.PATCH("/tags/:id/state", tag.Update)
-		apiv1.GET("/tags", tag.List)
+	ApiGroup := r.Group("/api/v1")
+	router.InitUserRouter(ApiGroup)
 
-		apiv1.POST("/articles", article.Create)
-		apiv1.DELETE("/articles/:id", article.Delete)
-		apiv1.PUT("/articles/:id", article.Update)
-		apiv1.PATCH("/articles/:id/state", article.Update)
-		apiv1.GET("/articles/:id", article.Get)
-		apiv1.GET("/articles", article.List)
-
-	}
+	//apiv1.Use(middleware.JWT())
+	//{
+	//	apiv1.POST("/tags", tag.Create)
+	//	apiv1.DELETE("/tags/:id", tag.Delete)
+	//	apiv1.PUT("/tags/:id", tag.Update)
+	//	apiv1.PATCH("/tags/:id/state", tag.Update)
+	//	apiv1.GET("/tags", tag.List)
+	//
+	//	apiv1.POST("/articles", article.Create)
+	//	apiv1.DELETE("/articles/:id", article.Delete)
+	//	apiv1.PUT("/articles/:id", article.Update)
+	//	apiv1.PATCH("/articles/:id/state", article.Update)
+	//	apiv1.GET("/articles/:id", article.Get)
+	//	apiv1.GET("/articles", article.List)
+	//
+	//}
 
 	return r
 }

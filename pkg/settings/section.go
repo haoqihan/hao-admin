@@ -51,6 +51,12 @@ type EmailSettingS struct {
 	To       []string
 }
 
+type CaptchaSettingS struct {
+	KeyLong   int
+	ImgWidth  int
+	ImgHeight int
+}
+
 var sections = make(map[string]interface{})
 
 func (s *Settings) ReadSection(k string, v interface{}) error {

@@ -12,4 +12,5 @@ var (
 	JWTSetting      *settings.JWTSettingS
 	EmailSetting    *settings.EmailSettingS
 	Logger          *logger.Logger
+	CaptchaSetting  *settings.CaptchaSettingS
 )

@@ -28,3 +28,9 @@ log日志     github.com/natefinch/lumberjack
 配置热更新   github.com/fsnotify/fsnotify
 
 ```
+
+梳理思路
+```cassandraql
+第一步：编写注册和登录部分的内容
+第二步：编写jwt认证和中间件部分的内容
+```

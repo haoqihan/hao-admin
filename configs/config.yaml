@@ -6,9 +6,9 @@ app:
   logsavepath: storage/logs
   maxpagesize: 100
   uploadimageallowexts:
-  - .jpg
-  - .jpeg
-  - .png
+    - .jpg
+    - .jpeg
+    - .png
   uploadimagemaxsize: 5
   uploadsavepath: storage/uploads
   uploadserverurl: http://127.0.0.1:8080/static
@@ -30,8 +30,8 @@ email:
   password: xxx
   port: 465
   to:
-  - xxx
-  - ppp
+    - xxx
+    - ppp
   username: xxx
 jwt:
   expire: 7200
@@ -42,3 +42,7 @@ server:
   readtimeout: 60
   runmode: release
   writetimeout: 60
+captcha:
+  key-long: 6
+  image-width: 240
+  imgage-height: 80

@@ -36,8 +36,6 @@ func NewRouter() *gin.Engine {
 	r.Use(middleware.Translations())
 	r.Use(middleware.Tracing())
 
-	//article := v1.NewArticle()
-	//tag := v1.NewTag()
 	upload := api.NewUpload()
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
@@ -47,6 +45,7 @@ func NewRouter() *gin.Engine {
 
 	ApiGroup := r.Group("/api/v1")
 	router.InitUserRouter(ApiGroup)
+	router.InitBaseRouter(ApiGroup)
 
 	//apiv1.Use(middleware.JWT())
 	//{

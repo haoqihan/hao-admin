@@ -1,15 +1,20 @@
 package app
 
 import (
-	"hao-admin/global"
-	"hao-admin/pkg/util"
 	"github.com/dgrijalva/jwt-go"
+	uuid "github.com/satori/go.uuid"
+	"hao-admin/global"
+	"hao-admin/internal/model"
 	"time"
 )
 
 type Claims struct {
-	AppKey    string `json:"app_key"`
-	AppSecret string `json:"app_secret"`
+	UUID        uuid.UUID
+	ID          uint32
+	Username    string
+	NickName    string
+	AuthorityId string
+	BufferTime  int64
 	jwt.StandardClaims
 }
 
@@ -19,15 +24,19 @@ func GetJWTSecret() []byte {
 }
 
 // GenerateToken 生成jwt token信息
-func GenerateToken(appKey, appSecret string) (string, error) {
+func GenerateToken(user model.User) (string, error) {
 	nowTime := time.Now()
 	expireTime := nowTime.Add(global.JWTSetting.Expire)
 	claims := Claims{
-		AppKey:    util.EncodeMD5(appKey),
-		AppSecret: util.EncodeMD5(appSecret),
+		UUID:        user.UUID,
+		ID:          user.ID,
+		NickName:    user.NickName,
+		Username:    user.Username,
+		AuthorityId: user.AuthorityId,
+		BufferTime:  60 * 60 * 24, // 缓冲时间1天，缓冲时间内会获得新的token令牌，此时用户会有两个有效令牌
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: expireTime.Unix(),
-			Issuer:    global.JWTSetting.Issuer,
+			ExpiresAt: expireTime.Unix(),        // 过期时间
+			Issuer:    global.JWTSetting.Issuer, // 签名发行者
 		},
 	}
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

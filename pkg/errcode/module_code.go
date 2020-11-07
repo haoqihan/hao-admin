@@ -14,4 +14,10 @@ var (
 	ErrorDeleteArticleFail = NewError(2009, "删除文章失败")
 
 	ErrorUploadFileFail = NewError(2010, "上传文件失败")
+
+	ErrorRegisterUserFail = NewError(2011, "注册用户失败")
+	ErrorCaptchaFail      = NewError(2012, "生成验证码失败")
+	ErrorCaptchaErr       = NewError(2013, "验证码错误")
+	ErrorLoginFail        = NewError(2014, "用户名或密码错误")
+	ErrorDeleteUserFail   = NewError(2015, "删除用户失败")
 )

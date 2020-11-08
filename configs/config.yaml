@@ -6,12 +6,16 @@ app:
   logsavepath: storage/logs
   maxpagesize: 100
   uploadimageallowexts:
-    - .jpg
-    - .jpeg
-    - .png
+  - .jpg
+  - .jpeg
+  - .png
   uploadimagemaxsize: 5
   uploadsavepath: storage/uploads
   uploadserverurl: http://127.0.0.1:8080/static
+captcha:
+  image-width: 240
+  imgage-height: 80
+  key-long: 6
 database:
   charset: utf8
   dbname: blog_service
@@ -30,8 +34,8 @@ email:
   password: xxx
   port: 465
   to:
-    - xxx
-    - ppp
+  - xxx
+  - ppp
   username: xxx
 jwt:
   expire: 7200
@@ -40,9 +44,5 @@ jwt:
 server:
   httpport: 8080
   readtimeout: 60
-  runmode: release
+  runmode: debug
   writetimeout: 60
-captcha:
-  key-long: 6
-  image-width: 240
-  imgage-height: 80

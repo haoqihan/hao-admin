@@ -43,6 +43,7 @@ func NewDBEngine(databaseSetting *settings.DataBaseSettingS) (*gorm.DB, error) {
 	db.DB().SetMaxIdleConns(databaseSetting.MaxIdleConns)
 	db.DB().SetMaxOpenConns(databaseSetting.MaxOpenConns)
 	otgorm.AddGormCallbacks(db)
+	db.AutoMigrate(&Meta{},&BaseMenuParameter{},&BaseMenu{},&Authority{},&User{})
 	return db, nil
 }
 

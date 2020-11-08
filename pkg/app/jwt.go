@@ -4,7 +4,6 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	uuid "github.com/satori/go.uuid"
 	"hao-admin/global"
-	"hao-admin/internal/model"
 	"time"
 )
 
@@ -24,15 +23,15 @@ func GetJWTSecret() []byte {
 }
 
 // GenerateToken 生成jwt token信息
-func GenerateToken(user model.User) (string, error) {
+func GenerateToken(UUID uuid.UUID, ID uint32, NickName, Username, AuthorityId string) (string, error) {
 	nowTime := time.Now()
 	expireTime := nowTime.Add(global.JWTSetting.Expire)
 	claims := Claims{
-		UUID:        user.UUID,
-		ID:          user.ID,
-		NickName:    user.NickName,
-		Username:    user.Username,
-		AuthorityId: user.AuthorityId,
+		UUID:       UUID,
+		ID:          ID,
+		NickName:    NickName,
+		Username:    Username,
+		AuthorityId: AuthorityId,
 		BufferTime:  60 * 60 * 24, // 缓冲时间1天，缓冲时间内会获得新的token令牌，此时用户会有两个有效令牌
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),        // 过期时间

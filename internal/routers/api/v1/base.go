@@ -38,7 +38,7 @@ func (b Base) Login(c *gin.Context) {
 		response.ToErrorResponse(errcode.ErrorLoginFail)
 		return
 	}
-	token, err := app.GenerateToken(*user)
+	token, err := app.GenerateToken(user.UUID,user.ID,user.NickName,user.Password,user.AuthorityId)
 	if err != nil {
 		global.Logger.Errorf("app.GenerateToken err:%v", err)
 		response.ToErrorResponse(errcode.UnauthorizedTokenGenerate)
